@@ -11,3 +11,18 @@ services:
     ports:
       - ${DB_EXPOSE_PORT}:5432
  
+
+  backend:
+    image: yiisoftware/yii2-php:7.1-apache
+    volumes:
+      - ./backend/composer/cache:/root/.composer/cache:delegated
+      - ./backend/basic:/app:delegated
+    environment:
+      DB_DATABASE: ${DB_NAME}
+      DB_PASSWORD: ${DB_PASS}
+      DB_USER: ${DB_USER}
+      DB_HOST: ${DB_HOST}
+      PHP_USER_ID: ${USER_UNIX_ID}
+      IS_PRODUCCION: ${IS_PRODUCTION}
+    ports:
+      - ${BACKEND_EXPOSE_PORT}:80
