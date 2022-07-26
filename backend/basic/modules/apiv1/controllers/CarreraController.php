@@ -7,6 +7,7 @@ use yii\rest\ActiveController;
 /**
  * Default controller for the `apiv1` module
  */
-class DefaultController extends ActiveController
+class CarreraController extends ActiveController
 {
+    public $modelClass = 'app\models\Carrera';
 }
