@@ -38,7 +38,7 @@
               <td>{{ course.id }}</td>
               <td>{{ course.nombre }}</td>
               <td>
-                <router-link :to='{name:"addCourse"}'>
+                <router-link :to='{name:"editCourse", params:{id:course.id}}'>
                   <v-btn icon color="primary"><v-icon>mdi-clipboard-edit-outline</v-icon></v-btn>
                 </router-link>
                 <v-btn icon color="error" @click="remove(course.id)"><v-icon>mdi-delete</v-icon></v-btn>
@@ -90,9 +90,8 @@ export default {
     },
     remove(id){
       if (confirm('¿Desea Elminar la Carrera?')){
-        this.axios.delete('/apiv1/carrera/' + id)
-          .then(response => {
-            console.log(response)
+        this.axios.delete(`/apiv1/carrera/${id}`)
+          .then(() => {
             this.loadData(1)
           })
           .catch(error => {

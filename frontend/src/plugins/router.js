@@ -5,6 +5,7 @@ import AulasAbout from '@/views/AulasAbout'
 import AulasTools from '@/views/AulasTools'
 import CourseCrud from '@/views/course/CourseCrud'
 import AddCourse from '@/views/course/AddCourse'
+import EditCourse from '@/views/course/EditCourse'
 import NotFound from '@/views/NotFound.vue'
 Vue.use(VueRouter)
 
@@ -14,6 +15,7 @@ const routes = [
   { path: '/tools', name: 'tools', component: AulasTools },
   { path: '/tools/course', name: 'courseCrud', component: CourseCrud },
   { path: '/tools/course/add_course', name: 'addCourse', component: AddCourse },
+  { path: '/tools/course/edit_course', name: 'editCourse', component: EditCourse },
   { path: '/404/', component: NotFound },
   { path: '*', redirect: '/404' }
 
