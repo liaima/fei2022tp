@@ -49,8 +49,8 @@
 
     data: () => ({
       items: [
-        {title: 'Home', icon: 'mdi-view-dashboard'},
-        {title: 'Acerca de', icon: 'mdi-information-variant'}
+        {title: 'Home', icon: 'mdi-view-dashboard', to: '/'},
+        {title: 'Acerca de', icon: 'mdi-information-variant', to: '/about'}
       ],
     }),
     mouted(){
