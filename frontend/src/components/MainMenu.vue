@@ -50,7 +50,8 @@
     data: () => ({
       items: [
         {title: 'Home', icon: 'mdi-view-dashboard', to: '/'},
-        {title: 'Acerca de', icon: 'mdi-information-variant', to: '/about'}
+        {title: 'Acerca de', icon: 'mdi-information-variant', to: '/about'},
+        {title: 'Administración', icon: 'mdi-hammer-wrench', to: '/tools'},
       ],
     }),
     mouted(){
