@@ -35,5 +35,6 @@ services:
       DB_HOST: ${DB_HOST}
       PHP_USER_ID: ${USER_UNIX_ID}
       IS_PRODUCCION: ${IS_PRODUCTION}
+      ALOWED_DOMAIN: ${ALOWED_DOMAIN}
     ports:
       - ${BACKEND_EXPOSE_PORT}:80
