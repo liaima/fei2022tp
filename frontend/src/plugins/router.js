@@ -12,7 +12,7 @@ const routes = [
   { path: '/', name: 'home', component: AulasHome },
   { path: '/about', name: 'about', component: AulasAbout },
   { path: '/tools', name: 'tools', component: AulasTools },
-  { path: '/tools/course', name: 'course', component: CourseCrud },
+  { path: '/tools/course', name: 'courseCrud', component: CourseCrud },
   { path: '/tools/course/add_course', name: 'addCourse', component: AddCourse },
   { path: '/404/', component: NotFound },
   { path: '*', redirect: '/404' }

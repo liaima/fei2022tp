@@ -25,6 +25,9 @@
               <th class="text-left">
                 Nombre
               </th>
+              <th class="text-left">
+                Acciones
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -34,6 +37,12 @@
             >
               <td>{{ course.id }}</td>
               <td>{{ course.nombre }}</td>
+              <td>
+                <router-link :to='{name:"addCourse"}'>
+                  <v-btn icon color="primary"><v-icon>mdi-clipboard-edit-outline</v-icon></v-btn>
+                </router-link>
+                <v-btn icon color="error" @click="remove(course.id)"><v-icon>mdi-delete</v-icon></v-btn>
+              </td>
             </tr>
           </tbody>
         </template>
@@ -67,9 +76,6 @@ export default {
           console.log(response)
           if (response.data.length > 0) {
             that.courses = response.data
-            /*
-            that.reg.id = response.data[0].id
-            that.reg.name = response.data[0].nombre*/
             that.currentPage = response.headers["x-pagination-current-page"]
             that.pageCount = response.headers["x-pagination-page-count"]
             that.totalCount = response.headers["x-pagination-total-count"]
@@ -81,7 +87,19 @@ export default {
         .then( () => {
           that.loading = false;
         })
-    }
+    },
+    remove(id){
+      if (confirm('¿Desea Elminar la Carrera?')){
+        this.axios.delete('/apiv1/carrera/' + id)
+          .then(response => {
+            console.log(response)
+            this.loadData(1)
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      }
+    },
   },
   mounted() {
     this.loadData(1)
