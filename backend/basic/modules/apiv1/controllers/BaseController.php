@@ -12,7 +12,7 @@ class BaseController extends ActiveController
 {
     public static function allowedDomains()
     {
-        return [$_SERVER["REMOTE_ADDR"], $_ENV['ALOWEDDOMAIN']];
+        return [$_SERVER["REMOTE_ADDR"], $_ENV['ALOWED_DOMAIN']];
     }
 
     public function behaviors()
