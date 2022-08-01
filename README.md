@@ -12,7 +12,7 @@
 - Configurar las Variables de Entono:
 
 ```
-  cp .env.dist .env
+  cp .env-dist .env
 ```
 
 - Ejecutar el docker compose:
@@ -24,7 +24,7 @@
 - Correr el sript de primer inicio:
 
 ```
-bin/first-start.sh
+bin/first_start.sh
 ```
 
 - Instalar paquetes npm:
