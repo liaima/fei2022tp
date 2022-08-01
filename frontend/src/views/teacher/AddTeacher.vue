@@ -1,6 +1,6 @@
 <template>
   <div>  
-    <h1>Editar Carrera #{{ this.$route.params.id }} - {{ reg.nombre }}</h1>
+    <h1>Crear Profesor</h1>
     <div>
       <v-form
         ref="form"
@@ -10,19 +10,32 @@
       >
         <v-text-field
           v-model="reg.nombre"
-          :rules="nameRules"
+          :rules="requiredRules"
           label="Nombre"
           required
           ></v-text-field>
+        <v-text-field
+          v-model="reg.apellido"
+          :rules="requiredRules"
+          label="Apellido"
+          required
+          ></v-text-field>
+        <v-text-field
+          v-model="reg.mostrar"
+          :rules="requiredRules"
+          label="Mostrar"
+          required
+          ></v-text-field>
+
           <v-btn
             class="mr-4"
             color="primary"
             type="submit"
           >
             <v-icon left>
-              mdi-content-save
+              mdi-plus
             </v-icon>
-            Guardar
+            Agregar
           </v-btn>
           <v-btn
             class="mr-4"
@@ -34,25 +47,39 @@
             </v-icon>
             Volver
           </v-btn>
+          <v-btn
+            class="mr-4"
+            color="warning"
+            @click="reset"
+          >
+            <v-icon left>
+              mdi-autorenew
+            </v-icon>
+            Limpiar
+          </v-btn>
+
       </v-form>
+    
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "EditCourse",
+  name: "AddCourse",
   data: () => ({
     reg: {
       nombre: "",
+      apellido: "",
+      mostrar: "",
     },
     valid: true,
     loading: false,
-    nameRules: [
-        v => !!v || 'El Nombre es Obligatorio',
+    requiredRules: [
+        v => !!v || 'Este campo es Obligatorio',
       ],
   }),
-   methods: {
+  methods: {
     validate () {
       return this.$refs.form.validate()
     },
@@ -68,32 +95,24 @@ export default {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },
 
-    async loadData(){
-      await this.axios.get(`/apiv1/carrera/${this.$route.params.id}`)
-        .then(response =>{
-          this.reg = response.data
-        })    
-        .catch(error=>{
-          console.error(error)
-        })
-    },
     async save(){
       this.loading = true;
-      await this.axios.put(`/apiv1/carrera/${this.$route.params.id}`, this.reg)
+      console.log(this.reg)
+      var that = this;
+      await this.axios.post('/apiv1/profesor', that.reg)
         .then(response => {
           console.log(response)
-          this.$router.push({name:"courseCrud"})
+          this.$router.push({name:"teacherCrud"})
          })
         .catch( (error) => {
           console.error(error);
         })
         .then( () => {
-          this.loading = false;
+          that.loading = false;
         })
     }
   },
   mounted() {
-    this.loadData()
   }
 }
 </script>

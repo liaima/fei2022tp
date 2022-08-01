@@ -36,8 +36,10 @@
     data () {
       return {
         items: [
-          { title: 'Carrera', icon: 'mdi-view-dashboard', to:'/tools/course'},
-          { title: 'About', icon: 'mdi-forum' },
+          { title: 'Carreras', icon: 'mdi-school', to:'/tools/course'},
+          { title: 'Profesores', icon: 'mdi-account-multiple', to:'/tools/teacher' },
+          { title: 'Materias', icon: 'mdi-human-male-board' },
+          { title: 'Aulas', icon: 'mdi-chair-school' },
         ],
       }
     },
