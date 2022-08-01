@@ -12,6 +12,9 @@ import EditTeacher from '@/views/teacher/EditTeacher'
 import CourseCrud from '@/views/course/CourseCrud'
 import AddCourse from '@/views/course/AddCourse'
 import EditCourse from '@/views/course/EditCourse'
+import ClassroomCrud from '@/views/classroom/ClassroomCrud'
+import AddClassroom from '@/views/classroom/AddClassroom'
+import EditClassroom from '@/views/classroom/EditClassroom'
 
 
 import NotFound from '@/views/NotFound.vue'
@@ -30,6 +33,9 @@ const routes = [
   { path: '/tools/course', name: 'courseCrud', component: CourseCrud },
   { path: '/tools/course/add_course', name: 'addCourse', component: AddCourse },
   { path: '/tools/course/edit_course', name: 'editCourse', component: EditCourse },
+  { path: '/tools/classroom', name: 'classroomCrud', component: ClassroomCrud },
+  { path: '/tools/classroom/add_classroom', name: 'addClassroom', component: AddClassroom },
+  { path: '/tools/classroom/edit_classroom', name: 'editClassroom', component: EditClassroom },
 
   { path: '/404/', component: NotFound },
   { path: '*', redirect: '/404' }
