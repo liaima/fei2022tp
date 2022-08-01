@@ -1,7 +1,7 @@
 <template>
   <div>  
     <h1>Administrar Profesores</h1>
-    <div>
+    <div class="pa-6">
      <router-link :to='{name:"addTeacher"}'>
        <v-btn
        tile
@@ -15,6 +15,12 @@
      </router-link>
     </div>
     <div>
+    <v-progress-linear
+      indeterminate
+      color="teal"
+      :hidden="!loading"
+    ></v-progress-linear>
+
       <v-simple-table>
         <template v-slot:default>
           <thead>

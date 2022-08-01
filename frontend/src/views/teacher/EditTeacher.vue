@@ -1,6 +1,6 @@
 <template>
   <div>  
-    <h1>Editar Profesor #{{ this.$route.params.id }} - {{ reg.nombre }} {{ reg.apellido }}</h1>
+    <h1>Editar Profesor/a #{{ this.$route.params.id }} - {{ reg.nombre }} {{ reg.apellido }}</h1>
     <div>
       <v-form
         ref="form"
@@ -31,6 +31,9 @@
             class="mr-4"
             color="primary"
             type="submit"
+            :loading="loading"
+            :disabled="loading"
+            @click="loader = 'loading'"
           >
             <v-icon left>
               mdi-content-save
@@ -67,7 +70,15 @@ export default {
     requiredRules: [
         v => !!v || 'Este campo es Obligatorio',
       ],
+    loader: null,
   }),
+  watch: {
+        loader () {
+          const l = this.loader
+          this[l] = !this[l]
+        },
+  },
+
    methods: {
     validate () {
       return this.$refs.form.validate()

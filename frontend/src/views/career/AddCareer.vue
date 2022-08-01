@@ -18,7 +18,10 @@
             class="mr-4"
             color="primary"
             type="submit"
-          >
+            :loading="loading"
+            :disabled="loading"
+            @click="loader = 'loading'"
+           >
             <v-icon left>
               mdi-plus
             </v-icon>
@@ -63,7 +66,14 @@ export default {
     nameRules: [
         v => !!v || 'El Nombre es Obligatorio',
       ],
+    loader: null,
   }),
+  watch: {
+        loader () {
+          const l = this.loader
+          this[l] = !this[l]
+        },
+  },
   methods: {
     validate () {
       return this.$refs.form.validate()
@@ -97,6 +107,7 @@ export default {
         })
     }
   },
+
   mounted() {
   }
 }

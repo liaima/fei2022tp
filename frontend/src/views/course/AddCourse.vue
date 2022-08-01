@@ -46,6 +46,9 @@
             class="mr-4"
             color="primary"
             type="submit"
+            :loading="loading"
+            :disabled="loading"
+            @click="loader = 'loading'"
           >
             <v-icon left>
               mdi-plus
@@ -97,7 +100,14 @@ export default {
     requiredRules: [
         v => !!v || 'Este campo es Obligatorio',
       ],
+    loader: null,
   }),
+  watch: {
+        loader () {
+          const l = this.loader
+          this[l] = !this[l]
+        },
+  },
   methods: {
     validate () {
       return this.$refs.form.validate()
