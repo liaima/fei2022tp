@@ -2,7 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import AulasHome from '@/views/AulasHome'
 import AulasAbout from '@/views/AulasAbout'
-import AulasTools from '@/views/AulasTools'
+import ReservationCrud from '@/views/reservation/ReservationCrud'
+import AddReservation from '@/views/reservation/AddReservation'
+import EditReservation from '@/views/reservation/EditReservation'
+import AulasAdmin from '@/views/AulasAdmin'
 import CareerCrud from '@/views/career/CareerCrud'
 import AddCareer from '@/views/career/AddCareer'
 import EditCareer from '@/views/career/EditCareer'
@@ -23,8 +26,10 @@ Vue.use(VueRouter)
 const routes = [
   { path: '/', name: 'home', component: AulasHome },
   { path: '/about', name: 'about', component: AulasAbout },
-  { path: '/reservation', name: 'about', component: AulasAbout },
-  { path: '/admin', name: 'admin', component: AulasTools },
+  { path: '/reservation', name: 'reservationCrud', component: ReservationCrud },
+  { path: '/reservation/add_reservation', name: 'addReservation', component: AddReservation },
+  { path: '/reservation/edit_reservation/:id', name: 'editReservation', component: EditReservation },
+  { path: '/admin', name: 'admin', component: AulasAdmin },
   { path: '/admin/teacher', name: 'teacherCrud', component: TeacherCrud },
   { path: '/admin/teacher/add_teacher', name: 'addTeacher', component: AddTeacher },
   { path: '/admin/teacher/edit_teacher/:id', name: 'editTeacher', component: EditTeacher },

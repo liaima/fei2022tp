@@ -9,7 +9,7 @@
 import NavButtons from '@/components/NavButtons.vue';
 
 export default {
-  name: "AulasTools",
+  name: "AulasAdmin",
 
   components:{
     NavButtons
