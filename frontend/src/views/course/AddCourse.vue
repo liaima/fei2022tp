@@ -1,22 +1,50 @@
 <template>
   <div>  
-    <h1>Administrar Carrera</h1>
+    <h1>Crear Carrera</h1>
     <div>
       <v-form
         ref="form"
-        @submit.prevent="save"
+        v-model="valid"
+        lazy-validation
+        @submit.prevent="submit"
       >
         <v-text-field
           v-model="reg.nombre"
+          :rules="nameRules"
           label="Nombre"
           required
           ></v-text-field>
           <v-btn
             class="mr-4"
+            color="primary"
             type="submit"
           >
+            <v-icon left>
+              mdi-plus
+            </v-icon>
             Agregar
           </v-btn>
+          <v-btn
+            class="mr-4"
+            color="secondary"
+            @click="goBack"
+          >
+            <v-icon left>
+              mdi-arrow-left
+            </v-icon>
+            Volver
+          </v-btn>
+          <v-btn
+            class="mr-4"
+            color="warning"
+            @click="reset"
+          >
+            <v-icon left>
+              mdi-autorenew
+            </v-icon>
+            Limpiar
+          </v-btn>
+
       </v-form>
     
     </div>
@@ -30,12 +58,28 @@ export default {
     reg: {
       nombre: "",
     },
-    currentPage: 0,
-    pageCount: 0,
-    totalCount: 0,
+    valid: true,
     loading: false,
+    nameRules: [
+        v => !!v || 'El Nombre es Obligatorio',
+      ],
   }),
   methods: {
+    validate () {
+      return this.$refs.form.validate()
+    },
+    submit () {
+      if(this.validate()){
+        this.save()
+      }
+    },
+    reset () {
+        this.$refs.form.reset()
+    },
+    goBack() {
+      window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
+    },
+
     async save(){
       this.loading = true;
       console.log(this.reg)

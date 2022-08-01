@@ -1,24 +1,40 @@
 <template>
   <div>  
-    <h1>Administrar Carrera</h1>
+    <h1>Editar Carrera #{{ this.$route.params.id }} - {{ reg.nombre }}</h1>
     <div>
       <v-form
         ref="form"
-        @submit.prevent="save"
+        v-model="valid"
+        lazy-validation
+        @submit.prevent="submit"
       >
         <v-text-field
           v-model="reg.nombre"
+          :rules="nameRules"
           label="Nombre"
           required
           ></v-text-field>
           <v-btn
             class="mr-4"
+            color="primary"
             type="submit"
           >
-            Guardar
+            <v-icon left>
+              mdi-plus
+            </v-icon>
+            Agregar
+          </v-btn>
+          <v-btn
+            class="mr-4"
+            color="secondary"
+            @click="goBack"
+          >
+            <v-icon left>
+              mdi-arrow-left
+            </v-icon>
+            Volver
           </v-btn>
       </v-form>
-    
     </div>
   </div>
 </template>
@@ -30,9 +46,28 @@ export default {
     reg: {
       nombre: "",
     },
+    valid: true,
     loading: false,
+    nameRules: [
+        v => !!v || 'El Nombre es Obligatorio',
+      ],
   }),
-  methods: {
+   methods: {
+    validate () {
+      return this.$refs.form.validate()
+    },
+    submit () {
+      if(this.validate()){
+        this.save()
+      }
+    },
+    reset () {
+        this.$refs.form.reset()
+    },
+    goBack() {
+      window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
+    },
+
     async loadData(){
       await this.axios.get(`/apiv1/carrera/${this.$route.params.id}`)
         .then(response =>{
