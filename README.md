@@ -14,6 +14,13 @@
 ```
   cp .env-dist .env
 ```
+- Correr el sript de primer inicio para el Frontend:
+Tenga a mano el path de a la app
+
+```
+pwd
+bin/first_start_frontend.sh
+```
 
 - Ejecutar el docker compose:
 
@@ -24,13 +31,7 @@
 - Correr el sript de primer inicio:
 
 ```
-bin/first_start.sh
-```
-
-- Instalar paquetes npm:
-
-```
-bin/npm.sh update
+bin/first_start_backend.sh
 ```
 
 - Correr las migraciones:
@@ -38,3 +39,5 @@ bin/npm.sh update
 ```
 bin/yii.sh migrate
 ```
+
+- Finalmente abrir la app en http://localhost:8080
