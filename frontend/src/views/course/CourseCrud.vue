@@ -1,8 +1,8 @@
 <template>
   <div>  
-    <h1>Administrar Profesores</h1>
+    <h1>Administrar Materias</h1>
     <div>
-     <router-link :to='{name:"addTeacher"}'>
+     <router-link :to='{name:"addCourse"}'>
        <v-btn
        tile
        color="success"
@@ -26,10 +26,13 @@
                 Nombre
               </th>
               <th class="text-left">
-                Apellido
+                Cantidad Alumnos
               </th>
               <th class="text-left">
-                Mostrar
+                Carrera
+              </th>
+              <th class="text-left">
+                Profesor
               </th>
               <th class="text-left">
                 Acciones
@@ -38,18 +41,19 @@
           </thead>
           <tbody>
             <tr
-              v-for="teacher in teachers"
-              :key="teacher.id"
+              v-for="course in courses"
+              :key="course.id"
             >
-              <td>{{ teacher.id }}</td>
-              <td>{{ teacher.nombre }}</td>
-              <td>{{ teacher.apellido }}</td>
-              <td>{{ teacher.mostrar }}</td>
+              <td>{{ course.id }}</td>
+              <td>{{ course.nombre }}</td>
+              <td>{{ course.cant_alumnos }}</td>
+              <td>{{ course.carrera.nombre }}</td>
+              <td>{{ course.profesor.nombre }} {{ course.profesor.apellido }}</td>
               <td>
-                <router-link :to='{name:"editTeacher", params:{id:teacher.id}}'>
+                <router-link :to='{name:"editCourse", params:{id:course.id}}'>
                   <v-btn icon color="primary"><v-icon>mdi-clipboard-edit-outline</v-icon></v-btn>
                 </router-link>
-                <v-btn icon color="error" @click="remove(teacher.id)"><v-icon>mdi-delete</v-icon></v-btn>
+                <v-btn icon color="error" @click="remove(course.id)"><v-icon>mdi-delete</v-icon></v-btn>
               </td>
             </tr>
           </tbody>
@@ -61,26 +65,29 @@
 
 <script>
 export default {
-  name: "TeacherCrud",
+  name: "CourseCrud",
   data: () => ({
     reg: {
       id: null,
       name: null,
+      cant_alumnos: null,
+      id_carrera: null,
+      id_profesor: null,
     },
     currentPage: 0,
     pageCount: 0,
     totalCount: 0,
     loading: false,
-    teachers: [],
+    courses: [],
   }),
   methods: {
     loadData(page){
       this.loading = true;
       var that = this;
-      this.axios.get('/apiv1/profesor?per-page=10@page=' + page)
+      this.axios.get('/apiv1/materia?per-page=10@page=' + page)
         .then( (response) => {
           console.log(response)
-          that.teachers = response.data
+          that.courses = response.data
           if (response.data.length > 0) {
             that.currentPage = response.headers["x-pagination-current-page"]
             that.pageCount = response.headers["x-pagination-page-count"]
@@ -95,8 +102,8 @@ export default {
         })
     },
     remove(id){
-      if (confirm('¿Desea Elminar el Profesor?')){
-        this.axios.delete(`/apiv1/profesor/${id}`)
+      if (confirm('¿Desea Elminar la Materia?')){
+        this.axios.delete(`/apiv1/materia/${id}`)
           .then(() => {
             this.loadData(1)
           })

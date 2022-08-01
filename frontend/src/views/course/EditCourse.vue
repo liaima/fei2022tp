@@ -1,6 +1,6 @@
 <template>
   <div>  
-    <h1>Editar Profesor #{{ this.$route.params.id }} - {{ reg.nombre }} {{ reg.apellido }}</h1>
+    <h1>Editar Materia #{{ this.$route.params.id }} - {{ reg.nombre }}</h1>
     <div>
       <v-form
         ref="form"
@@ -15,19 +15,33 @@
           required
           ></v-text-field>
         <v-text-field
-          v-model="reg.apellido"
-          :rules="requiredRules"
-          label="Apellido"
-          required
+          v-model="reg.cant_alumnos"
+          label="Cantidad Alumnos"
           ></v-text-field>
-        <v-text-field
-          v-model="reg.mostrar"
-          :rules="requiredRules"
-          label="Mostrar"
-          required
-          ></v-text-field>
-
-          <v-btn
+         <v-autocomplete
+          v-model="reg.id_carrera"
+          :items="careers"
+          item-text="nombre"
+          item-value="id"
+          label="Carrera"
+          clearable
+        ></v-autocomplete>
+        <v-autocomplete
+          v-model="reg.id_profesor"
+          :items="teachers"
+          item-text="nombre"
+          item-value="id"
+          label="Porfesor"
+          clearable
+        >
+          <template v-slot:selection="data">{{ data.item.nombre }} {{data.item.apellido}}</template>
+          <template v-slot:item="data">
+           <v-list-item-content>
+             <v-list-item-title>{{data.item.nombre}} {{data.item.apellido}}</v-list-item-title>
+            </v-list-item-content>
+          </template>
+        </v-autocomplete>
+           <v-btn
             class="mr-4"
             color="primary"
             type="submit"
@@ -54,14 +68,17 @@
 
 <script>
 export default {
-  name: "EditTeacher",
+  name: "EditCourse",
   data: () => ({
     reg: {
-      nombre: "",
-      apellido: "",
-      mostrar: "",
-
+      id: '',
+      name: '',
+      cant_alumnos: '',
+      id_carrera: '',
+      id_profesor: '',
     },
+    careers: [],
+    teachers: [],
     valid: true,
     loading: false,
     requiredRules: [
@@ -85,7 +102,7 @@ export default {
     },
 
     async loadData(){
-      await this.axios.get(`/apiv1/profesor/${this.$route.params.id}`)
+      await this.axios.get(`/apiv1/materia/${this.$route.params.id}`)
         .then(response =>{
           this.reg = response.data
         })    
@@ -95,10 +112,10 @@ export default {
     },
     async save(){
       this.loading = true;
-      await this.axios.put(`/apiv1/profesor/${this.$route.params.id}`, this.reg)
+      await this.axios.put(`/apiv1/materia/${this.$route.params.id}`, this.reg)
         .then(response => {
           console.log(response)
-          this.$router.push({name:"teacherCrud"})
+          this.$router.push({name:"courseCrud"})
          })
         .catch( (error) => {
           console.error(error);
@@ -106,10 +123,35 @@ export default {
         .then( () => {
           this.loading = false;
         })
-    }
+    },
+
+     async searchCareers(){
+      await this.axios.get('/apiv1/carrera')
+        .then( (response) => {
+          this.careers = response.data
+        })
+        .catch( (error) => {
+          console.error(error);
+        })
+
+    },
+
+    async searchTeachers(){
+      await this.axios.get('/apiv1/profesor')
+        .then( (response) => {
+          this.teachers = response.data
+        })
+        .catch( (error) => {
+          console.error(error);
+        })
+
+    },
+
   },
   mounted() {
     this.loadData()
+    this.searchTeachers()
+    this.searchCareers()
   }
 }
 </script>

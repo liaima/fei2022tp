@@ -66,14 +66,14 @@
 
 <script>
 export default {
-  name: "AddCourse",
+  name: "AddTeacher",
   data: () => ({
     reg: {
       nombre: "",
       apellido: "",
       mostrar: "",
     },
-    valid: true,
+     valid: true,
     loading: false,
     requiredRules: [
         v => !!v || 'Este campo es Obligatorio',

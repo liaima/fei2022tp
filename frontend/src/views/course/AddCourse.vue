@@ -1,6 +1,6 @@
 <template>
   <div>  
-    <h1>Crear Profesor</h1>
+    <h1>Crear Materia</h1>
     <div>
       <v-form
         ref="form"
@@ -15,18 +15,33 @@
           required
           ></v-text-field>
         <v-text-field
-          v-model="reg.apellido"
-          :rules="requiredRules"
-          label="Apellido"
-          required
+          v-model="reg.cant_alumnos"
+          label="Cantidad Alumnos"
           ></v-text-field>
-        <v-text-field
-          v-model="reg.mostrar"
-          :rules="requiredRules"
-          label="Mostrar"
-          required
-          ></v-text-field>
-
+        <v-autocomplete
+          v-model="reg.id_carrera"
+          :items="careers"
+          item-text="nombre"
+          item-value="id"
+          label="Carrera"
+          clearable
+        ></v-autocomplete>
+        <v-autocomplete
+          v-model="reg.id_profesor"
+          :items="teachers"
+          item-text="nombre"
+          item-value="id"
+          label="Porfesor"
+          clearable
+        >
+          <template v-slot:selection="data">{{ data.item.nombre }} {{data.item.apellido}}</template>
+          <template v-slot:item="data">
+           <v-list-item-content>
+             <v-list-item-title>{{data.item.nombre}} {{data.item.apellido}}</v-list-item-title>
+            </v-list-item-content>
+          </template>
+        </v-autocomplete>
+ 
           <v-btn
             class="mr-4"
             color="primary"
@@ -69,10 +84,14 @@ export default {
   name: "AddCourse",
   data: () => ({
     reg: {
-      nombre: "",
-      apellido: "",
-      mostrar: "",
+      id: '',
+      name: '',
+      cant_alumnos: '',
+      id_carrera: '',
+      id_profesor: '',
     },
+    careers: [],
+    teachers: [],
     valid: true,
     loading: false,
     requiredRules: [
@@ -95,14 +114,35 @@ export default {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },
 
+    async searchCareers(){
+      await this.axios.get('/apiv1/carrera')
+        .then( (response) => {
+          this.careers = response.data
+        })
+        .catch( (error) => {
+          console.error(error);
+        })
+
+    },
+
+    async searchTeachers(){
+      await this.axios.get('/apiv1/profesor')
+        .then( (response) => {
+          this.teachers = response.data
+        })
+        .catch( (error) => {
+          console.error(error);
+        })
+
+    },
+
     async save(){
       this.loading = true;
       console.log(this.reg)
       var that = this;
-      await this.axios.post('/apiv1/profesor', that.reg)
-        .then(response => {
-          console.log(response)
-          this.$router.push({name:"teacherCrud"})
+      await this.axios.post('/apiv1/materia', that.reg)
+        .then(() => {
+          this.$router.push({name:"courseCrud"})
          })
         .catch( (error) => {
           console.error(error);
@@ -113,6 +153,8 @@ export default {
     }
   },
   mounted() {
+    this.searchCareers()
+    this.searchTeachers()
   }
 }
 </script>

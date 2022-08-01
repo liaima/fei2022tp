@@ -9,6 +9,10 @@ import EditCareer from '@/views/career/EditCareer'
 import TeacherCrud from '@/views/teacher/TeacherCrud'
 import AddTeacher from '@/views/teacher/AddTeacher'
 import EditTeacher from '@/views/teacher/EditTeacher'
+import CourseCrud from '@/views/course/CourseCrud'
+import AddCourse from '@/views/course/AddCourse'
+import EditCourse from '@/views/course/EditCourse'
+
 
 import NotFound from '@/views/NotFound.vue'
 Vue.use(VueRouter)
@@ -23,6 +27,10 @@ const routes = [
   { path: '/tools/career', name: 'careerCrud', component: CareerCrud },
   { path: '/tools/career/add_career', name: 'addCareer', component: AddCareer },
   { path: '/tools/career/edit_career', name: 'editCareer', component: EditCareer },
+  { path: '/tools/course', name: 'courseCrud', component: CourseCrud },
+  { path: '/tools/course/add_course', name: 'addCourse', component: AddCourse },
+  { path: '/tools/course/edit_course', name: 'editCourse', component: EditCourse },
+
   { path: '/404/', component: NotFound },
   { path: '*', redirect: '/404' }
 
