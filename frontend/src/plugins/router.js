@@ -5,6 +5,9 @@ import AulasAbout from '@/views/AulasAbout'
 import ReservationCrud from '@/views/reservation/ReservationCrud'
 import AddReservation from '@/views/reservation/AddReservation'
 import EditReservation from '@/views/reservation/EditReservation'
+import ScheduleCrud from '@/views/schedule/ScheduleCrud'
+import AddSchedule from '@/views/schedule/AddSchedule'
+import EditSchedule from '@/views/schedule/EditSchedule'
 import AulasAdmin from '@/views/AulasAdmin'
 import CareerCrud from '@/views/career/CareerCrud'
 import AddCareer from '@/views/career/AddCareer'
@@ -29,6 +32,9 @@ const routes = [
   { path: '/reservation', name: 'reservationCrud', component: ReservationCrud },
   { path: '/reservation/add_reservation', name: 'addReservation', component: AddReservation },
   { path: '/reservation/edit_reservation/:id', name: 'editReservation', component: EditReservation },
+  { path: '/schedule', name: 'scheduleCrud', component: ScheduleCrud },
+  { path: '/schedule/add_schedule', name: 'addSchedule', component: AddSchedule },
+  { path: '/schedule/edit_schedule/:id', name: 'editSchedule', component: EditSchedule },
   { path: '/admin', name: 'admin', component: AulasAdmin },
   { path: '/admin/teacher', name: 'teacherCrud', component: TeacherCrud },
   { path: '/admin/teacher/add_teacher', name: 'addTeacher', component: AddTeacher },
