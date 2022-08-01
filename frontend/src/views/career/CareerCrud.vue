@@ -1,8 +1,8 @@
 <template>
   <div>  
-    <h1>Administrar Profesores</h1>
+    <h1>Administrar Carrera</h1>
     <div>
-     <router-link :to='{name:"addTeacher"}'>
+     <router-link :to='{name:"addCareer"}'>
        <v-btn
        tile
        color="success"
@@ -10,7 +10,7 @@
          <v-icon left>
            mdi-plus
          </v-icon>
-         Nuevo
+         Nueva
        </v-btn>
      </router-link>
     </div>
@@ -26,30 +26,22 @@
                 Nombre
               </th>
               <th class="text-left">
-                Apellido
-              </th>
-              <th class="text-left">
-                Mostrar
-              </th>
-              <th class="text-left">
                 Acciones
               </th>
             </tr>
           </thead>
           <tbody>
             <tr
-              v-for="teacher in teachers"
-              :key="teacher.id"
+              v-for="career in careers"
+              :key="career.id"
             >
-              <td>{{ teacher.id }}</td>
-              <td>{{ teacher.nombre }}</td>
-              <td>{{ teacher.apellido }}</td>
-              <td>{{ teacher.mostrar }}</td>
+              <td>{{ career.id }}</td>
+              <td>{{ career.nombre }}</td>
               <td>
-                <router-link :to='{name:"editTeacher", params:{id:teacher.id}}'>
+                <router-link :to='{name:"editCareer", params:{id:career.id}}'>
                   <v-btn icon color="primary"><v-icon>mdi-clipboard-edit-outline</v-icon></v-btn>
                 </router-link>
-                <v-btn icon color="error" @click="remove(teacher.id)"><v-icon>mdi-delete</v-icon></v-btn>
+                <v-btn icon color="error" @click="remove(career.id)"><v-icon>mdi-delete</v-icon></v-btn>
               </td>
             </tr>
           </tbody>
@@ -61,7 +53,7 @@
 
 <script>
 export default {
-  name: "TeacherCrud",
+  name: "CareerCrud",
   data: () => ({
     reg: {
       id: null,
@@ -71,17 +63,17 @@ export default {
     pageCount: 0,
     totalCount: 0,
     loading: false,
-    teachers: [],
+    careers: [],
   }),
   methods: {
     loadData(page){
       this.loading = true;
       var that = this;
-      this.axios.get('/apiv1/profesor?per-page=10@page=' + page)
+      this.axios.get('/apiv1/carrera?per-page=10@page=' + page)
         .then( (response) => {
           console.log(response)
-          that.teachers = response.data
           if (response.data.length > 0) {
+            that.careers = response.data
             that.currentPage = response.headers["x-pagination-current-page"]
             that.pageCount = response.headers["x-pagination-page-count"]
             that.totalCount = response.headers["x-pagination-total-count"]
@@ -95,8 +87,8 @@ export default {
         })
     },
     remove(id){
-      if (confirm('¿Desea Elminar el Profesor?')){
-        this.axios.delete(`/apiv1/profesor/${id}`)
+      if (confirm('¿Desea Elminar la Carrera?')){
+        this.axios.delete(`/apiv1/carrera/${id}`)
           .then(() => {
             this.loadData(1)
           })

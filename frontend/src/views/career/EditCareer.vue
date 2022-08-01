@@ -1,6 +1,6 @@
 <template>
   <div>  
-    <h1>Editar Profesor #{{ this.$route.params.id }} - {{ reg.nombre }} {{ reg.apellido }}</h1>
+    <h1>Editar Carrera #{{ this.$route.params.id }} - {{ reg.nombre }}</h1>
     <div>
       <v-form
         ref="form"
@@ -10,23 +10,10 @@
       >
         <v-text-field
           v-model="reg.nombre"
-          :rules="requiredRules"
+          :rules="nameRules"
           label="Nombre"
           required
           ></v-text-field>
-        <v-text-field
-          v-model="reg.apellido"
-          :rules="requiredRules"
-          label="Apellido"
-          required
-          ></v-text-field>
-        <v-text-field
-          v-model="reg.mostrar"
-          :rules="requiredRules"
-          label="Mostrar"
-          required
-          ></v-text-field>
-
           <v-btn
             class="mr-4"
             color="primary"
@@ -54,18 +41,15 @@
 
 <script>
 export default {
-  name: "EditTeacher",
+  name: "EditCareer",
   data: () => ({
     reg: {
       nombre: "",
-      apellido: "",
-      mostrar: "",
-
     },
     valid: true,
     loading: false,
-    requiredRules: [
-        v => !!v || 'Este campo es Obligatorio',
+    nameRules: [
+        v => !!v || 'El Nombre es Obligatorio',
       ],
   }),
    methods: {
@@ -85,7 +69,7 @@ export default {
     },
 
     async loadData(){
-      await this.axios.get(`/apiv1/profesor/${this.$route.params.id}`)
+      await this.axios.get(`/apiv1/carrera/${this.$route.params.id}`)
         .then(response =>{
           this.reg = response.data
         })    
@@ -95,10 +79,10 @@ export default {
     },
     async save(){
       this.loading = true;
-      await this.axios.put(`/apiv1/profesor/${this.$route.params.id}`, this.reg)
+      await this.axios.put(`/apiv1/carrera/${this.$route.params.id}`, this.reg)
         .then(response => {
           console.log(response)
-          this.$router.push({name:"teacherCrud"})
+          this.$router.push({name:"careerCrud"})
          })
         .catch( (error) => {
           console.error(error);
