@@ -24,14 +24,12 @@
 </template>
 
 <script>
-import axios from '@/plugins/axios';
 export default {
   name: "EditCourse",
   data: () => ({
     reg: {
       nombre: "",
     },
-    axios: axios,
     loading: false,
   }),
   methods: {

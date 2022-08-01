@@ -52,7 +52,6 @@
 </template>
 
 <script>
-import axios from '@/plugins/axios';
 export default {
   name: "CourseCrud",
   data: () => ({
@@ -60,7 +59,6 @@ export default {
       id: null,
       name: null,
     },
-    axios: axios,
     currentPage: 0,
     pageCount: 0,
     totalCount: 0,

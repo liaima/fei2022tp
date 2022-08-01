@@ -24,14 +24,12 @@
 </template>
 
 <script>
-import axios from '@/plugins/axios';
 export default {
   name: "AddCourse",
   data: () => ({
     reg: {
       nombre: "",
     },
-    axios: axios,
     currentPage: 0,
     pageCount: 0,
     totalCount: 0,
