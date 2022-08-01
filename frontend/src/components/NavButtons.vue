@@ -36,10 +36,10 @@
     data () {
       return {
         items: [
-          { title: 'Carreras', icon: 'mdi-school', to:'/tools/career'},
-          { title: 'Profesores', icon: 'mdi-account-multiple', to:'/tools/teacher' },
-          { title: 'Materias', icon: 'mdi-human-male-board', to:'/tools/course' },
-          { title: 'Aulas', icon: 'mdi-chair-school', to:'/tools/classroom' },
+          { title: 'Carreras', icon: 'mdi-school', to:'/admin/career'},
+          { title: 'Profesores', icon: 'mdi-account-multiple', to:'/admin/teacher' },
+          { title: 'Materias', icon: 'mdi-human-male-board', to:'/admin/course' },
+          { title: 'Aulas', icon: 'mdi-chair-school', to:'/admin/classroom' },
         ],
       }
     },

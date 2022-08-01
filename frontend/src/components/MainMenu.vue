@@ -51,7 +51,9 @@
       items: [
         {title: 'Home', icon: 'mdi-view-dashboard', to: '/'},
         {title: 'Acerca de', icon: 'mdi-information-variant', to: '/about'},
-        {title: 'Administración', icon: 'mdi-hammer-wrench', to: '/tools'},
+        {title: 'Reservas', icon: 'mdi-table-check', to: '/reservation'},
+        {title: 'Horarios', icon: 'mdi-calendar-clock', to: '/schedule'},
+        {title: 'Administración', icon: 'mdi-hammer-wrench', to: '/admin'},
       ],
     }),
     mouted(){
