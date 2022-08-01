@@ -1,13 +1,17 @@
 <template>
   <div class="home">  
     <h1>Home</h1>
-    <router-link to='/about'>Ir a About</router-link>
+    <HomeComponent></HomeComponent>
   </div>
 </template>
 
 <script>
+import HomeComponent from '@/components/HomeComponent'
 export default {
-  name: "AulasHome"
+  name: "AulasHome",
+  components:{
+    HomeComponent,
+  }
 }
 </script>
 

@@ -64,7 +64,7 @@
               :key="reservation.id"
             >
               <td>{{ reservation.id }}</td>
-              <td>{{ reservation.id_aula }}</td>
+              <td>{{ reservation.aula.descripcion }}</td>
               <td>{{ reservation.fh_desde }}</td>
               <td>{{ reservation.fh_hasta }}</td>
               <td>{{ reservation.observacion }}</td>

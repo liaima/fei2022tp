@@ -64,7 +64,7 @@
               :key="schedule.id"
             >
               <td>{{ schedule.id }}</td>
-              <td>{{ schedule.id_materia }}</td>
+              <td>{{ schedule.materia.nombre }}</td>
               <td>{{ schedule.id_reserva }}</td>
               <td>{{ schedule.fh_desde }}</td>
               <td>{{ schedule.fh_hasta }}</td>
